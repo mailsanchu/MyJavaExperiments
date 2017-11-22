@@ -1,0 +1,56 @@
+https://mqtt-devint.cld.dtveng.com:8443/v1/service/linear/channel/coldStart?ccid=3007
+
+https://mqtt-devint.cld.dtveng.com:8443/v1/service/vod/channel/coldStart?vodProvidersPageSize=3007
+
+https://egbitbucket.dtvops.net/projects/CATA/repos/cms-ingest/compare/commits?sourceBranch=refs%2Fheads%2Ffeature%2FNONART-1380&targetBranch=refs%2Fheads%2Fmaster
+https://egbitbucket.dtvops.net/projects/CATA/repos/cms-ingest/compare/commits?sourceBranch=refs%2Fheads%2FNONART-1380&targetBranch=refs%2Fheads%2Fmaster
+
+
+Branch	Behind/Ahead	Updated	Pull requests	Builds	Actions
+feature/NONART-1140-write-VOD_CHANNELS-ex-providers-toCB
+4 commits ahead of master
+ 
+4
+35 mins ago	
+OPEN
+Branch actions
+feature/NONART-1466
+2 commits ahead and 3 commits behind master 
+3
+ 
+2
+2 hours ago	
+OPEN
+Branch actions
+feature/NONART-1139-1140-write-VOD-Titles-and-providers-toCB
+sed 's/\([a-z]*\).*/\1/'
+sed 's/private String \([a-z]*\);/\1/'
+
+
+
+
+
+sed -i 's/private \(.*\) \(.*\);/@JsonProperty("\2")\n\0/' LinearContent.java 
+sed -i 's/private List\(.*\) \(.*\);/@JsonInclude\(JsonInclude.Include.NON_EMPTY\)\n\0/' LinearContent.java 
+sed -i 's/public \([^Boolean].*\) \(\<.\)\(.*\);/\t\0\n\tpublic \1 get\u\2\3\(\){return \2\3;}\n\tpublic void set\u\2\3\(\1 \2\){this.\2\3 = \2\3;}/g' Rating.java
+
+
+
+
+
+
+
+sed 's/public \(.*\) \(\<.\)\(.*\);/\t\1 \2;\n\tpublic \1 get\2\(\){return \2;}\n\tpublic void set\2\(\1 \2\){this.\2 = \2;}/' Rating.java
+
+sed 's/public \(.*\) \(\<.\)\(.*\)/\U\2/' Rating.java
+
+
+
+
+awk 'match($0, "public (.*) ([a-z]{1})(.*);"/) {
+    print substr($0, RSTART, RLENGTH)
+}
+' Rating.java
+
+
+\t\1 \2;\n\tpublic \1 get\2\(\){return \2;}\n\tpublic void set\2\(\1 \2\){this.\2 = $3;}
