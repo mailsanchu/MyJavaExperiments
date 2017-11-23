@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 REG_EX='public (.*) ([a-z]{1})(.*)(;)$'
+File_NAME="Rating.java"
 LIST_METHODS=()
-A=$(grep -oP "$REG_EX"  Rating.java)
+A=$(grep -oP "$REG_EX"  "$File_NAME")
 for k in "${A[@]}"
 do
   
@@ -21,12 +22,12 @@ do
       GET_METHOD="public ""${BASH_REMATCH[1]}"" get""${BASH_REMATCH[2]^^}""${BASH_REMATCH[3]}""()";
       SET_METHOD="public void set""${BASH_REMATCH[2]^^}""${BASH_REMATCH[3]}""(""${BASH_REMATCH[1]} ${BASH_REMATCH[2]}""${BASH_REMATCH[3]}";
       
-      GET_METHOD_FOUND=`fgrep -c "$GET_METHOD" Rating.java`
+      GET_METHOD_FOUND=`fgrep -c "$GET_METHOD" "$File_NAME"`
       if [ $GET_METHOD_FOUND -eq 0 ]; then
         LIST_METHODS+=("    public ""${BASH_REMATCH[1]}"" get""${BASH_REMATCH[2]^^}""${BASH_REMATCH[3]}""(){return ""${BASH_REMATCH[2]}""${BASH_REMATCH[3]};""}")
       fi
       
-      SET_METHOD_FOUND=`fgrep -c "$SET_METHOD" Rating.java`
+      SET_METHOD_FOUND=`fgrep -c "$SET_METHOD" "$File_NAME"`
       if [ $SET_METHOD_FOUND -eq 0 ]; then
         LIST_METHODS+=("    public void set""${BASH_REMATCH[2]^^}""${BASH_REMATCH[3]}""(""${BASH_REMATCH[1]} ${BASH_REMATCH[2]}""${BASH_REMATCH[3]}){""this.""${BASH_REMATCH[2]}""${BASH_REMATCH[3]}=${BASH_REMATCH[2]}${BASH_REMATCH[3]};}")
       fi
@@ -36,7 +37,9 @@ done
 
 if [ "${#LIST_METHODS[@]}" != 0 ]; then
   echo "${#LIST_METHODS[@]}"
-  sed -i '$ d' Rating.java
-  printf "%s\n" "${LIST_METHODS[@]}" >>  Rating.java
-  printf "}" >>  Rating.java
+  sed -i '$ d' "$File_NAME"
+  printf "%s\n" "${LIST_METHODS[@]}" >>  "$File_NAME"
+  printf "}" >>  "$File_NAME"
 fi
+
+java -jar /home/svarkey/Downloads/google-java-format-1.5-all-deps.jar --replace "$File_NAME"
