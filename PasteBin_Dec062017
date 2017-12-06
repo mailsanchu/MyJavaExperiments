@@ -1,0 +1,26 @@
+wget -O -  --retry-connrefused --no-check-certificate -T 60   "http://dev-int-kube.aeg.cloud/api/v1/proxy/namespaces/catalog-ingest/services/https:linearcontent:443/v1/service/linear/coldStart?ccid=3007&start=2017-11-20T00:00:00Z&end=2017-11-21T00:00:00Z" | jq .
+
+
+
+wget -O -  --retry-connrefused --no-check-certificate -T 60   "http://dev-int-kube.aeg.cloud/api/v1/proxy/namespaces/catalog-ingest/services/https:linearcontent:443/v1/service/linear/coldStart?ccid=3007&start=2017-11-20T00:00:00Z&end=2017-11-21T00:00:00Z" | jq .
+
+
+wget -O -  --retry-connrefused --no-check-certificate -T 60   "http://dev-int-kube.aeg.cloud/api/v1/proxy/namespaces/catalog-ingest/services/https:channels:443/v1/service/linear/coldStart" | jq .
+
+
+
+wget -O -  --retry-connrefused --no-check-certificate -T 60   "http://dev-int-kube.aeg.cloud/api/v1/proxy/namespaces/catalog-ingest/services/https:channels:443/v1/service/vod/coldStart" | jq .
+
+
+
+wget -O -  --retry-connrefused --no-check-certificate -T 60   "http://dev-int-kube.aeg.cloud/api/v1/proxy/namespaces/catalog-ingest/services/https:channels:443/env.json" | jq .
+
+
+
+## Change spring property to kubernetis kConfigManger property
+echo  "cms.cold.data.url"  | sed 's/./\U&/g' | sed 's/\./_/g'
+
+
+
+
+
