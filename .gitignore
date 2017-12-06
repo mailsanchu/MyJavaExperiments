@@ -1,0 +1,35 @@
+# Eclipse
+.classpath
+.project
+.settings/
+.metadata/
+
+# Intellij
+.idea/
+*.iml
+*.iws
+*.eml
+
+# Mac
+.DS_Store
+
+# Maven
+log/
+target/
+*.versionsBackup
+
+# SVN
+.svn/
+
+# Spring
+/.springBeans
+
+# Backups
+*~
+
+# Packages
+*.zip
+
+src/main/resources/application-dev.properties
+## For local testing
+src/main/java/com/att/eg/catalog/cms/ingest/gitignore
