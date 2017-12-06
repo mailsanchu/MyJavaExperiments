@@ -20,6 +20,12 @@ wget -O -  --retry-connrefused --no-check-certificate -T 60   "http://dev-int-ku
 ## Change spring property to kubernetis kConfigManger property
 echo  "cms.cold.data.url"  | sed 's/./\U&/g' | sed 's/\./_/g'
 
+## In bashRc
+kC(){  echo  "$1"  | sed 's/./\U&/g' | sed 's/\./_/g'; }
+
+ kC server.ssl.enabled
+
+
 
 
 
