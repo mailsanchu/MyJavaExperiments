@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+for (( i=1; i <= 1; i++ )); do
+  list=$(curl -u 'USERNAME:PASSWORD' -X POST --data-urlencode 'statement=SELECT resourceId FROM `catalog-ingest-linearcontent` LIMIT 5' 'http://10.108.60.129:8093/query/service'  | jq  .results[].resourceId)
+  for id in $list
+  do
+    anotherId=`(echo $id | sed 's/"//g')`;
+    echo deleting $anotherId
+    POST_BODY=`echo 'statement=DELETE FROM catalog-ingest-linearcontent where resourceId='$id`;
+    echo $POST_BODY
+   curl -u 'USERNAME:PASSWORD' --data-urlencode 'statement=DELETE FROM `catalog-ingest-linearcontent` where resourceId='$id -v -s -X POST "http://10.108.60.129:8093/query/service"
+   curl -u 'USERNAME:PASSWORD' --data-urlencode 'statement=SELECT count(resourceId) FROM `catalog-ingest-linearcontent`' -v -s -X POST "http://10.108.60.129:8093/query/service"
+  done
+done
