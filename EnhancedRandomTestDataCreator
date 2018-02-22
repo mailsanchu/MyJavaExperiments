@@ -1,13 +1,3 @@
-package com.att.eg.catalog.ingest.linearcontent;
-
-import com.att.ajsc.common.couchbase.descriptor.FieldDescriptor;
-import com.att.ajsc.common.couchbase.repository.impl.CouchBaseDAO;
-import com.att.ajsc.common.couchbase.repository.impl.CouchbaseRepositoryFactory;
-import com.att.ajsc.common.couchbase.repository.impl.DefaultFieldClassMapFactory;
-import com.att.ajsc.common.couchbase.repository.impl.DocumentTypeModule;
-import com.att.ajsc.common.discovery.datastore.model.ChannelDocument;
-import com.att.ajsc.common.discovery.datastore.model.LinearContentDocument;
-import com.att.ajsc.common.discovery.datastore.model.enums.IngestStatus;
 import com.couchbase.client.deps.com.fasterxml.jackson.core.JsonProcessingException;
 import com.couchbase.client.deps.com.fasterxml.jackson.databind.MapperFeature;
 import com.couchbase.client.deps.com.fasterxml.jackson.databind.ObjectMapper;
@@ -32,10 +22,10 @@ import java.nio.charset.Charset;
 import java.util.Map;
 import java.util.Random;
 
-import static com.att.ajsc.common.discovery.datastore.model.enums.IngestStatus.COMPLETE;
+
 
 @SpringBootApplication
-@ComponentScan(basePackages = {"com.att.eg.catalog.ingest.linearcontent", "com.att.ajsc", "com.att.eg.monitoring"})
+@ComponentScan(basePackages = {""})
 @EnableAutoConfiguration(exclude = {DataSourceAutoConfiguration.class, HibernateJpaAutoConfiguration.class})
 public class Application {
     private static final String LOCALHOST = "localhost";
