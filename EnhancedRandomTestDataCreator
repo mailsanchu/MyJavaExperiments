@@ -58,8 +58,8 @@ public class Application {
         o.configure(MapperFeature.SORT_PROPERTIES_ALPHABETICALLY, true);
         o.registerModule(new DocumentTypeModule());
         System.out.println(o.writerWithDefaultPrettyPrinter().writeValueAsString(lcD));
-        Cluster cluster = CouchbaseCluster.create("10.108.60.129");
-        Bucket bucket = cluster.openBucket("catalog-ingest-channels", "C@tal0gIngChan!");
+        Cluster cluster = CouchbaseCluster.create("");
+        Bucket bucket = cluster.openBucket("", "");
         JsonObject jsonObject = JsonObject.fromJson(o.writeValueAsString(lcD));
         JsonDocument doc = JsonDocument.create(lcD.getCcid(), jsonObject);
         JsonDocument response = bucket.upsert(doc);
