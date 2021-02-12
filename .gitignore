@@ -33,3 +33,4 @@ target/
 src/main/resources/application-dev.properties
 ## For local testing
 src/main/java/com/att/eg/catalog/cms/ingest/gitignore
+/.history/
