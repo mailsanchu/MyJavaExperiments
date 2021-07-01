@@ -7,3 +7,5 @@ seq 1 3 |xargs -I{} -n 1 -P 4 mKube get pods -o=jsonpath='{range .items[*]}{.met
 curl -s "https://cs-catalogservice-hollow-producer-2-0-4.awsw2.cld.dtvops.net/api/overLaps" | jq 'walk(if type == "object" then with_entries(if .key | endswith("DateTime")  then .value |= (./1000 | strftime("%Y-%m-%d %H:%M UTC")) end) end)'
 curl -s "https://cs-catalogservice-edge-372-3-0.awsw2.cld.dtvops.net/api/nodes?filter=(subType==Channel)&fields=id" | jq -r '. | map({(.id): .status}) | add |  keys_unsorted[] as $k | [$k, .[$k]] | join("|")' | sort |  awk 'cnt[$1]++{if (cnt[$1]==2) print prev[$1]; print} {prev[$1]=$0}' 
 curl -s "https://cs-catalogservice-hollow-producer-2-0-4.awsw2.cld.dtvops.net/api/overLaps" | jq -rc '. | values[]  | map((.previous.startDateTime, .previous.endDateTime, .current.startDateTime, .current.endDateTime ) |= (./1000 | strftime("%Y-%m-%d %H:%M UTC")))' 
+ aws s3api list-objects --bucket "metadata-hollow-data" --prefix "catalogservice-dev-int-view/" --query "reverse(sort_by(Contents,&LastModified))" | jq -r '.[0:10] | map({(.Key): .Size}) | add |  keys_unsorted[] as $k | [$k, .[$k]] | join("|")' | column -t -s"|" -o "                     "
+
